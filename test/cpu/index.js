@@ -7,5 +7,6 @@
 module.exports = function() {
   describe('CPU', function() {
     require('./registers')();
+    require('./instructions')();
   });
 };
