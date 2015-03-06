@@ -33,8 +33,20 @@ module.exports = function() {
 
       it('After CLS GFX must be filled with 0', function() {
         cpu.instructions.cls(cpu);
-        checkGFX(cpu.gfx, 0);  
+        checkGFX(cpu.gfx, 0);
       });
     });
+
+    describe('JPM NNN', function() {
+      it('Put JMP NNN in PC', function() {
+        cpu.registers.pc = 0x12FE;
+        assert.equal(cpu.registers.pc, 0x12FE);
+      });
+
+      it('After JMP NNN PC should have NNN', function() {
+        cpu.instructions.jmpnnn(cpu);
+        assert.equal(cpu.registers.pc, 0x02FE);
+      });
+    })
   });
 };
