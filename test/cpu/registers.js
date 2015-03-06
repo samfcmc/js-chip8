@@ -18,35 +18,30 @@ function messWithRegisters(registers) {
   registers.pc = FAKE;
 }
 
+function checkRegistersValue(cpu, value) {
+  for(var i = 0; i < cpu.registers.v.length; i++) {
+    assert.equal(cpu.registers.v[i], value);
+  }
+
+  assert.equal(cpu.registers.pc, value);
+  assert.equal(cpu.registers.I, value);
+}
+
 module.exports = function() {
   describe('Registers', function() {
 
     var cpu = new CPU();
 
-
-
     describe('Reset', function() {
       it('Before reset mess with registers', function() {
         messWithRegisters(cpu.registers);
-
-        for(var i = 0; i < cpu.registers.v.length; i++) {
-          assert.equal(cpu.registers.v[i], FAKE);
-        }
-
-        assert.equal(cpu.registers.pc, FAKE);
-        assert.equal(cpu.registers.I, FAKE);
+        checkRegistersValue(cpu, FAKE);
       });
 
       it('After reset all registers must have 0', function() {
         cpu.registers.reset();
-
-        for(var i = 0; i < cpu.registers.v.length; i++) {
-          assert.equal(cpu.registers.v[i], 0);
-        }
-
-        assert.equal(cpu.registers.pc, 0);
-        assert.equal(cpu.registers.I, 0);
-      })
+        checkRegistersValue(cpu, 0);
+      });
 
     });
   });
