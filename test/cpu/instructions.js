@@ -23,9 +23,9 @@ function checkGFX(gfx, value) {
 module.exports = function() {
   describe('Instructions', function() {
 
-    var cpu = new CPU();
-
     describe('CLS', function() {
+      var cpu = new CPU();
+
       it('Before CLS mess with GFX', function() {
         messWithGFX(cpu.gfx);
         checkGFX(cpu.gfx, FAKE);
@@ -38,6 +38,8 @@ module.exports = function() {
     });
 
     describe('RET', function() {
+      var cpu = new CPU();
+
       cpu.registers.sp = 2;
       cpu.stack[2] = FAKE;
       var previousSP = cpu.registers.sp;
@@ -53,6 +55,8 @@ module.exports = function() {
     });
 
     describe('JPM NNN', function() {
+      var cpu = new CPU();
+
       it('Put JMP NNN in PC', function() {
         cpu.registers.pc = 0x12FE;
         assert.equal(cpu.registers.pc, 0x12FE);
@@ -62,6 +66,29 @@ module.exports = function() {
         cpu.instructions.jmpnnn(cpu);
         assert.equal(cpu.registers.pc, 0x02FE);
       });
+    });
+
+    describe('CALL NNN', function() {
+      var cpu = new CPU();
+      
+      cpu.registers.sp = 0;
+      var previousSP = cpu.registers.sp;
+      cpu.registers.pc = 0x22FE;
+      var previousPC = cpu.registers.pc;
+      cpu.instructions.callnnn(cpu);
+
+      it('SP should be incremented', function() {
+        assert.equal(cpu.registers.sp, previousSP + 1);
+      });
+
+      it('Top of stack should have PC', function() {
+        assert.equal(cpu.stack[cpu.registers.sp], previousPC);
+      });
+
+      it('PC should have the address to jump', function() {
+        assert.equal(cpu.registers.pc, 0x02FE);
+      });
     })
+
   });
 };
