@@ -37,6 +37,21 @@ module.exports = function() {
       });
     });
 
+    describe('RET', function() {
+      cpu.registers.sp = 2;
+      cpu.stack[2] = FAKE;
+      var previousSP = cpu.registers.sp;
+      cpu.instructions.ret(cpu);
+
+      it('PC should have what is in top of stack after RET', function() {
+        assert.equal(cpu.registers.pc, cpu.stack[cpu.registers.sp]);
+      });
+
+      it('SP should be decremented', function() {
+        assert.equal(cpu.registers.sp, previousSP - 1);
+      });
+    });
+
     describe('JPM NNN', function() {
       it('Put JMP NNN in PC', function() {
         cpu.registers.pc = 0x12FE;
