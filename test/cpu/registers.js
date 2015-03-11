@@ -4,30 +4,29 @@
  * Registers Test module
  */
 
-var assert = require('assert');
-var CPU = require('../../client/cpu');
-
 var FAKE = 0xFF;
 
-function messWithRegisters(registers) {
-  // Mess with all registers
-  for(var i = 0; i < registers.v.length; i++) {
-    registers.v[i] = FAKE;
-  }
-  registers.I = FAKE;
-  registers.pc = FAKE;
-}
-
-function checkRegistersValue(cpu, value) {
-  for(var i = 0; i < cpu.registers.v.length; i++) {
-    assert.equal(cpu.registers.v[i], value);
+module.exports = function(CPU, assert) {
+  function messWithRegisters(registers) {
+    // Mess with all registers
+    for(var i = 0; i < registers.v.length; i++) {
+      registers.v[i] = FAKE;
+    }
+    registers.I = FAKE;
+    registers.pc = FAKE;
+    registers.sp = FAKE;
   }
 
-  assert.equal(cpu.registers.pc, value);
-  assert.equal(cpu.registers.I, value);
-}
+  function checkRegistersValue(cpu, value) {
+    for(var i = 0; i < cpu.registers.v.length; i++) {
+      assert.equal(cpu.registers.v[i], value);
+    }
 
-module.exports = function() {
+    assert.equal(cpu.registers.pc, value);
+    assert.equal(cpu.registers.I, value);
+    assert.equal(cpu.registers.sp, value);
+  }
+
   describe('Registers', function() {
 
     var cpu = new CPU();

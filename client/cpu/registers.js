@@ -17,6 +17,7 @@ module.exports = function() {
       }
       this.I = 0;
       this.pc = 0;
+      this.sp = 0;
     }
   };
 

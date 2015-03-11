@@ -10,6 +10,7 @@ module.exports = {
     for(var i = 0; i < cpu.gfx.length; i++) {
       cpu.gfx[i] = 0;
     }
+    ++cpu.registers.pc;
   },
 
   ret: function(cpu) {

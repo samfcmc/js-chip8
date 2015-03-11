@@ -4,9 +4,9 @@
  * CPU Test module
  */
 
-module.exports = function() {
+module.exports = function(CPU, assert) {
   describe('CPU', function() {
-    require('./registers')();
-    require('./instructions')();
+    require('./registers')(CPU, assert);
+    require('./instructions')(CPU, assert);
   });
 };

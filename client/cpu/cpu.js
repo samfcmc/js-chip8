@@ -4,6 +4,12 @@
  * CPU Chip8
  */
 
+function resetArray(array) {
+  for(var i = 0; i < array.length; i++) {
+    array[i] = 0;
+  }
+}
+
 module.exports = function(registers, instructions) {
   var cpu = {
     memory: new Array(4096),
@@ -13,25 +19,20 @@ module.exports = function(registers, instructions) {
     delayTimer: 0xFF,
     soundTimer: 0xFF,
     stack: new Array(16),
-    key: new Array(16)
+    key: new Array(16),
+
+    reset: function() {
+      resetArray(this.memory);
+      this.registers.reset();
+      resetArray(this.gfx);
+      this.delayTimer = 0xFF;
+      this.soundTimer = 0xFF;
+      resetArray(this.stack);
+      resetArray(this.key);
+    }
   };
 
-  // Initialize it
-  for(var i = 0; i < cpu.memory.length; i++) {
-    cpu.memory[i] = 0;
-  }
-
-  for(var i = 0; i < cpu.gfx.length; i++) {
-    cpu.gfx[i] = 0;
-  }
-
-  for(var i = 0; i < cpu.stack.length; i++) {
-    cpu.stack[i] = 0;
-  }
-
-  for(var i = 0; i < cpu.key.length; i++) {
-    cpu.key[i] = 0;
-  }
+  cpu.reset();
 
   return cpu;
 };
