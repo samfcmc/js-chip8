@@ -6,11 +6,12 @@ module.exports = function(CPU, assert) {
       assert.equal(pc, oldpc + increment);
     });
   }
-  
+
   describe('Instructions', function() {
     require('./cls')(CPU, assert, testPC);
     require('./callnnn')(CPU, assert);
     require('./jmpnnn')(CPU, assert);
     require('./ret')(CPU, assert);
+    require('./sevxbyte')(CPU, assert);
   });
 };
