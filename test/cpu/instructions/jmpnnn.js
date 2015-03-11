@@ -9,8 +9,9 @@ module.exports = function(CPU, assert) {
     });
 
     it('Put JMP NNN in PC', function() {
-      cpu.registers.pc = 0x12FE;
-      assert.equal(cpu.registers.pc, 0x12FE);
+      cpu.registers.pc = 0;
+      cpu.memory[cpu.registers.pc] = 0x12FE;
+      assert.equal(cpu.memory[cpu.registers.pc], 0x12FE);
     });
 
     it('After JMP NNN PC should have NNN', function() {

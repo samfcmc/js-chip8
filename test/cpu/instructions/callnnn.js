@@ -10,7 +10,8 @@ module.exports = function(CPU, assert) {
       cpu = new CPU();
       cpu.registers.sp = 0;
       previousSP = cpu.registers.sp;
-      cpu.registers.pc = 0x22FE;
+      cpu.registers.pc = 0;
+      cpu.memory[cpu.registers.pc] = 0x22FE;
       previousPC = cpu.registers.pc;
       cpu.instructions.callnnn(cpu);
     });
