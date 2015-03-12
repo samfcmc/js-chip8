@@ -44,6 +44,13 @@ module.exports = {
     var vx = (opcode & 0x0F00) >> 8;
     var byte = opcode & 0x00FF;
     cpu.registers.pc += cpu.registers.v[vx] != byte ? 2 : 1;
+  },
+
+  sevxvy: function(cpu) {
+    var opcode = cpu.memory[cpu.registers.pc];
+    var vx = (opcode & 0x0F00) >> 8;
+    var vy = (opcode & 0x00F0) >> 4;
+    cpu.registers.pc += cpu.registers.v[vx] == cpu.registers.v[vy] ? 2 : 1;
   }
 
 };

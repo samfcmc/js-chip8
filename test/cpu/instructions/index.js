@@ -14,5 +14,6 @@ module.exports = function(CPU, assert) {
     require('./ret')(CPU, assert);
     require('./sevxbyte')(CPU, assert);
     require('./snevxbyte')(CPU, assert);
+    require('./sevxvy')(CPU, assert);
   });
 };
