@@ -51,6 +51,13 @@ module.exports = {
     var vx = (opcode & 0x0F00) >> 8;
     var vy = (opcode & 0x00F0) >> 4;
     cpu.registers.pc += cpu.registers.v[vx] == cpu.registers.v[vy] ? 2 : 1;
+  },
+
+  ldvxbyte: function(cpu, opcode) {
+    var vx = (opcode & 0x0F00) >> 8;
+    var byte = opcode & 0x00FF;
+    cpu.registers.v[vx] = byte;
+    cpu.registers.pc++;
   }
 
 };

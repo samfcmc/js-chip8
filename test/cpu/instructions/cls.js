@@ -35,6 +35,6 @@ module.exports = function(CPU, assert, testPC) {
       cpu.instructions.cls(cpu, opcode);
       checkGFX(cpu.gfx, 0);
     });
-    //testPC(oldpc, cpu1.registers.pc, 1);
+    //testPC(oldpc, cpu.registers.pc, 1);
   });
 };
