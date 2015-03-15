@@ -58,6 +58,13 @@ module.exports = {
     var byte = opcode & 0x00FF;
     cpu.registers.v[vx] = byte;
     cpu.registers.pc++;
+  },
+
+  addvxbyte: function(cpu, opcode) {
+    var vx = (opcode & 0x0F00) >> 8;
+    var byte = opcode & 0x00FF;
+    cpu.registers.v[vx] += byte;
+    cpu.registers.pc++;
   }
 
 };

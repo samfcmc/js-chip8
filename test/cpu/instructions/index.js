@@ -16,5 +16,6 @@ module.exports = function(CPU, assert) {
     require('./snevxbyte')(CPU, assert);
     require('./sevxvy')(CPU, assert);
     require('./ldvxbyte')(CPU, assert, testPC);
+    require('./addvxbyte')(CPU, assert);
   });
 };
