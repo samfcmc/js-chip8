@@ -19,6 +19,7 @@ module.exports = function(CPU, assert, testPC) {
   describe('CLS', function() {
     var cpu = {};
     var oldpc = 0;
+    var opcode = 0x00E0;
 
     beforeEach(function() {
       cpu = new CPU();
@@ -31,7 +32,7 @@ module.exports = function(CPU, assert, testPC) {
     });
 
     it('After CLS GFX must be filled with 0', function() {
-      cpu.instructions.cls(cpu);
+      cpu.instructions.cls(cpu, opcode);
       checkGFX(cpu.gfx, 0);
     });
     //testPC(oldpc, cpu1.registers.pc, 1);

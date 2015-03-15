@@ -6,14 +6,15 @@ module.exports = function(CPU, assert) {
   describe('RET', function() {
     var cpu = {};
     var previousSP = 0;
+    var opcode = 0x00EE
 
     before(function() {
       cpu = new CPU();
       cpu.registers.sp = 2;
       cpu.stack[cpu.registers.sp] = FAKE;
       previousSP = cpu.registers.sp;
-      cpu.instructions.ret(cpu);
-    })
+      cpu.instructions.ret(cpu, opcode);
+    });
 
 
     it('PC should have what was in the top of the stack', function() {

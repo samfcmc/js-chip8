@@ -5,15 +5,16 @@ module.exports = function(CPU, assert) {
     var cpu = {};
     var previousSP = 0;
     var previousPC = 0;
+    var opcode = 0x2FE;
 
     before(function() {
       cpu = new CPU();
       cpu.registers.sp = 0;
       previousSP = cpu.registers.sp;
       cpu.registers.pc = 0;
-      cpu.memory[cpu.registers.pc] = 0x22FE;
+      cpu.memory[cpu.registers.pc] = opcode;
       previousPC = cpu.registers.pc;
-      cpu.instructions.callnnn(cpu);
+      cpu.instructions.callnnn(cpu, opcode);
     });
 
     it('SP should be incremented', function() {
